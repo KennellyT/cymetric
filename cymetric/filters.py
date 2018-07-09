@@ -22,15 +22,26 @@ from cymetric.tools import format_nucs, reduce, merge, add_missing_time_step
 
 def transactions(evaler, senders=(), receivers=(), commodities=()):
     """
-    Filter the Transaction Data Frame on specific sending facility and
-    receving facility.
+    Filters the Transaction Data Frame on specific sending facility and
+    receving facility and/or a specific commodity exchanged
 
     Parameters
     ----------
-    evaler : evaler
-    senders :  of the sending facility
-    receivers :  of the receiving facility
-    commodities :  of the commodity exchanged
+    evaler : evaluator of database
+    
+    senders : list
+            List of the sending facility(ies)
+    
+    receivers :  list
+                List of the receiving facility(ies)
+    commodities :  list
+                List of the commodity(ies) exchanged
+    Returns
+    -------
+    trans : DataFrame
+          Dataframe of filtered transactions 
+    Notes
+    ----
     """
 
     # initiate evaluation
@@ -88,6 +99,13 @@ def transactions_nuc(evaler, senders=(), receivers=(), commodities=(), nucs=()):
     receivers :  of the receiving facility
     commodities :  of the commodity exchanged
     nucs :  of nuclide to select.
+    
+    Returns
+    -------
+    df : DataFrame
+          Dataframe of filtered transactions with nuclide compostion
+    Notes
+    ----
     """
 
     compo = evaler.eval('Materials')
@@ -107,7 +125,7 @@ def transactions_nuc(evaler, senders=(), receivers=(), commodities=(), nucs=()):
 
 def transactions_activity(evaler, senders=(), receivers=(), commodities=(), nucs=()):
     """
-    Return the transation df, with the activities. Applying nuclides selection
+    Return the transaction df, with the activities. Applying nuclides selection
     when required.
 
     Parameters
